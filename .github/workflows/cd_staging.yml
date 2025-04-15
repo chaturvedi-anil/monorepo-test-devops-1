@@ -20,24 +20,17 @@ jobs:
       - name: Add remote host to known_hosts
         run: |
           mkdir -p ~/.ssh
-          ssh-keyscan -H 3.111.37.231 >> ~/.ssh/known_hosts
-      
-      - name: SSH - Just loading env (for debug or checks)
+          ssh-keyscan -H 13.232.232.122 >> ~/.ssh/known_hosts
+
+      - name: SSH - Load env, Pull, Build and Restart
         run: |
-          ssh -i ~/anil_aws_key ubuntu@3.111.37.231 << 'EOF'
+          ssh -i ~/anil_aws_key ubuntu@13.232.232.122 << 'EOF'
             export NVM_DIR="$HOME/.nvm"
             source "$NVM_DIR/nvm.sh"
             source ~/.bashrc
             node -v
             pnpm -v
             pm2 -v
-
-      - name: SSH - Pull, Build and Restart
-        run: |
-          ssh -i ~/anil_aws_key ubuntu@3.111.37.231 << 'EOF'
-            export NVM_DIR="$HOME/.nvm"
-            source "$NVM_DIR/nvm.sh"
-            source ~/.bashrc
 
             cd monorepo-test-devops-1/
             git pull
