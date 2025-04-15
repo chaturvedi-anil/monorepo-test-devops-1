@@ -19,6 +19,7 @@ jobs:
 
       - name: Add remote host to known_hosts
         run: |
+          mkdir -p ~/.ssh
           ssh-keyscan -H 3.111.37.231 >> ~/.ssh/known_hosts
 
       - name: SSH and deploy
