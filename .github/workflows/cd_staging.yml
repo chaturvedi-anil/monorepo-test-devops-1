@@ -21,10 +21,24 @@ jobs:
         run: |
           mkdir -p ~/.ssh
           ssh-keyscan -H 3.111.37.231 >> ~/.ssh/known_hosts
-
-      - name: SSH and deploy
+      
+      - name: SSH - Just loading env (for debug or checks)
         run: |
           ssh -i ~/anil_aws_key ubuntu@3.111.37.231 << 'EOF'
+            export NVM_DIR="$HOME/.nvm"
+            source "$NVM_DIR/nvm.sh"
+            source ~/.bashrc
+            node -v
+            pnpm -v
+            pm2 -v
+
+      - name: SSH - Pull, Build and Restart
+        run: |
+          ssh -i ~/anil_aws_key ubuntu@3.111.37.231 << 'EOF'
+            export NVM_DIR="$HOME/.nvm"
+            source "$NVM_DIR/nvm.sh"
+            source ~/.bashrc
+
             cd monorepo-test-devops-1/
             git pull
             pnpm install 
@@ -33,3 +47,4 @@ jobs:
             pm2 restart http-server
             pm2 restart ws-server
           EOF
+
