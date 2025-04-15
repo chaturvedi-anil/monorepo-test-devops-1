@@ -15,7 +15,7 @@ jobs:
       - name: Set up SSH key
         run: |
           echo "${{ secrets.AWS_SSH_PRIVATE_KEY }}" > ~/anil_aws_key
-          chmod 600 ~/anil_aws_key
+          chmod 700 ~/anil_aws_key
 
       - name: Add remote host to known_hosts
         run: |
