@@ -10,7 +10,7 @@ jobs:
     steps: 
       - run: |
           echo "{{ secrets.AWS_SSH_PRIVATE_KEY }}" &> ~/anil_aws_key
-          ssh -i ~/anil_aws_key ubuntu@3.111.37.231
+          echo "yes" | ssh -i ~/anil_aws_key ubuntu@3.111.37.231
           cd monorepo-test-devops-1/ && git pull
           pnpm install 
           pnpm run build
