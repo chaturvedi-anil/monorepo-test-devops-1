@@ -20,7 +20,12 @@ jobs:
       - name: Add remote host to known_hosts
         run: |
           mkdir -p ~/.ssh
-          ssh-keyscan -H 13.232.232.122 >> ~/.ssh/known_hosts
+          if ssh-keyscan -H 13.232.232.122 >> ~/.ssh/known_hosts; then
+            echo "Host added to known_hosts"
+          else
+            echo "ssh-keyscan failed, but continuing..."
+          fi
+
 
       - name: SSH - Load env, Pull, Build and Restart
         run: |
