@@ -1,11 +1,8 @@
-FROM node:18
+FROM base as ws-server
 
 WORKDIR /app
-
 COPY . .
-
-RUN cd apps/ws-server && npm install
 
 EXPOSE 8080
 
-CMD ["npm", "run", "--prefix", "apps/ws-server", "start"]
+CMD ["pnpm", "--filter", "ws-server", "start"]

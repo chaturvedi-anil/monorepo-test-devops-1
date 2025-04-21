@@ -1,12 +1,8 @@
-FROM node:18
+FROM base as http-server
 
 WORKDIR /app
-
 COPY . .
-
-RUN cd apps/http-server && npm install
 
 EXPOSE 8000
 
-CMD ["npm", "run", "--prefix", "apps/http-server", "start"]
-
+CMD ["pnpm", "--filter", "http-server", "start"]
